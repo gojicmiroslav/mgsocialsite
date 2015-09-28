@@ -2,4 +2,9 @@ Push grane(koja nije master) na Git:
 	git push -u origin static-pages
 
 Ponistavanje svih promena i vracanje na zadnji commit:
-	git checkout -f	
+	git checkout -f
+
+Format naslova stranice(title):
+	About | Mg Social Site	
+
+	51:45
