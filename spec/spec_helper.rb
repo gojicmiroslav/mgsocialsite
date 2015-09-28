@@ -40,6 +40,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+<<<<<<< HEAD
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -94,3 +95,20 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+=======
+  # Configure Database Cleaner
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
+
+end
+
+>>>>>>> static-pages
