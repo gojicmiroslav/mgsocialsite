@@ -1,0 +1,5 @@
+Push grane(koja nije master) na Git:
+	git push -u origin static-pages
+
+Ponistavanje svih promena i vracanje na zadnji commit:
+	git checkout -f	
