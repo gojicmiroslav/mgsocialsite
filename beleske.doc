@@ -29,3 +29,8 @@ Inspect
 	# isto to
 	p user	
 
+Lokacija za slike: app/assets/images	
+
+Prikazivanje debug podataka:
+	- u layout/application.html.erb dodati
+				<%= debug(params) if Rails.env.development? %>

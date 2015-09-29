@@ -4,10 +4,16 @@ RSpec.describe "Static page", :type => :feature do
 
 	describe "Home page" do
 		it "should have the title Home" do
-			visit "static_pages/home"
+			visit "/"
 			expect(page).to have_selector("title",
 																		:text => "MG Social Site",
 																		:visible => false)
+		end
+
+		it "should have tag Header and Footer" do
+			visit visit "/"
+			expect(page).to have_selector("header")
+			expect(page).to have_selector("footer")
 		end
 	end
 
