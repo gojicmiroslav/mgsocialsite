@@ -6,7 +6,7 @@ RSpec.describe "Static page", :type => :feature do
 		it "should have the title Home" do
 			visit "static_pages/home"
 			expect(page).to have_selector("title",
-																		:text => "Home | MG Social Site",
+																		:text => "MG Social Site",
 																		:visible => false)
 		end
 	end

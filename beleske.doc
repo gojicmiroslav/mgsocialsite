@@ -1,3 +1,7 @@
+Git credentials:
+	username: gojicmiroslav
+	password: deronje777
+
 Push grane(koja nije master) na Git:
 	git push -u origin static-pages
 
@@ -7,4 +11,21 @@ Ponistavanje svih promena i vracanje na zadnji commit:
 Format naslova stranice(title):
 	About | Mg Social Site	
 
-	51:45
+U Rubiju je ovo isto:
+	%w[A B C].map {|char| char.downcase}
+	%w[A B C].map(&:downcase)
+
+	h1 = { :first_name => "Misa", :last_name => "Gojic"}
+	# first_name i last_name tehnicki nisu simboli, ali se konvertuju u simbole
+	h2 = { first_name: "Misa", last_name: "Gojic"}
+
+Primeri za Hes params:
+	params = {}
+	params[:user] = { first_name: "Misa", last_name: "Gojic" }
+	params[:user][:first_name] # Misa
+
+Inspect
+	puts user.inspect	
+	# isto to
+	p user	
+
