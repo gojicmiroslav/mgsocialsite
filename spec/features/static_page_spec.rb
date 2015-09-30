@@ -4,14 +4,14 @@ RSpec.describe "Static page", :type => :feature do
 
 	describe "Home page" do
 		it "should have the title Home" do
-			visit "/"
+			visit root_path
 			expect(page).to have_selector("title",
-																		:text => "MG Social Site",
+																		:text => full_title,
 																		:visible => false)
 		end
 
 		it "should have tag Header and Footer" do
-			visit visit "/"
+			visit root_path
 			expect(page).to have_selector("header")
 			expect(page).to have_selector("footer")
 		end
@@ -19,18 +19,52 @@ RSpec.describe "Static page", :type => :feature do
 
 	describe "Help page" do
 		it "should have the title Help" do
-			visit "static_pages/help"
+			visit root_path
+
+			click_link "Help"
+			
+			expect(page).to have_css("h1", text: "Help")
 			expect(page).to have_selector("title",
-																		:text => "Help | MG Social Site",
+																		:text => full_title("Help"),
 																		:visible => false)
 		end
 	end
 
 	describe "About page" do	
 		it "should have the title About" do
-			visit "static_pages/about"
+			visit root_path
+
+			click_link "About"
+
+			expect(page).to have_css("h1", text: "About")
 			expect(page).to have_selector("title",
-																		:text => "About | MG Social Site",
+																		:text => full_title("About"),
+																		:visible => false)
+		end
+	end
+
+	describe "Contact page" do	
+		it "should have the title About" do
+			visit root_path
+
+			click_link "Contact"
+
+			expect(page).to have_css("h1", text: "Contact")
+			expect(page).to have_selector("title",
+																		:text => full_title("Contact"),
+																		:visible => false)
+		end
+	end
+
+	describe "Sign Up page" do	
+		it "should have the title Sign Up" do
+			visit root_path
+
+			click_link "Sign Up"
+
+			expect(page).to have_css("h1", text: "Sign Up")
+			expect(page).to have_selector("title",
+																		:text => full_title("Sign Up"),
 																		:visible => false)
 		end
 	end
