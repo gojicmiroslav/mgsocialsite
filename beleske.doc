@@ -39,4 +39,4 @@ Podesavanje named routa u routes.rb
 			get 'help' => 'static_pages#help'	
 	-	sada imamo helper: help_path
 
-
+dsdsd
