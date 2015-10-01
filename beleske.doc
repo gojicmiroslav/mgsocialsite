@@ -39,5 +39,9 @@ Podesavanje named routa u routes.rb
 			get 'help' => 'static_pages#help'	
 	-	sada imamo helper: help_path
 
+Metode za update:
+	user.update_attributes(name: "dsd", email: "dsds")
+	user.update_attribute(name: "dsd")
 
-	nastaviti 01:05:25		
+
+nastaviti 01:16
