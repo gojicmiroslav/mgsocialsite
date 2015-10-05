@@ -39,4 +39,14 @@ Podesavanje named routa u routes.rb
 			get 'help' => 'static_pages#help'	
 	-	sada imamo helper: help_path
 
-dsdsd
+Metode za update:
+	user.update_attributes(name: "dsd", email: "dsds")
+	user.update_attribute(name: "dsd")
+
+Kopiranje Devise views u nasu app:
+	rails g devise:views
+
+Kako omoguciti menjanje view u Devise:
+	- u config/initializers.devise.rb podesiti	
+				config.scoped_views = true
+
