@@ -43,5 +43,11 @@ Metode za update:
 	user.update_attributes(name: "dsd", email: "dsds")
 	user.update_attribute(name: "dsd")
 
+Kopiranje Devise views u nasu app:
+	rails g devise:views
 
-nastaviti 01:16
+Kako omoguciti menjanje view u Devise:
+	- u config/initializers.devise.rb podesiti	
+				config.scoped_views = true
+
+nastaviti 01:22
