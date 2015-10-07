@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get  'about'   => 'static_pages#about'
   get  'contact' => 'static_pages#contact'
   #get  'signup'  => 'users#new'
-
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations"}
+  resources :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

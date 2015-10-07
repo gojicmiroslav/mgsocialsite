@@ -50,3 +50,8 @@ Kako omoguciti menjanje view u Devise:
 	- u config/initializers.devise.rb podesiti	
 				config.scoped_views = true
 
+Komanda za debuger: debugger
+
+Resetovanje baze: rake db:migrate:reset
+
+nastaviti 01:40
