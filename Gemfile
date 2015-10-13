@@ -30,6 +30,11 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'mocha'
   gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem "show_me_the_cookies"
+  gem 'rack_session_access'
 end
 
 group :development do

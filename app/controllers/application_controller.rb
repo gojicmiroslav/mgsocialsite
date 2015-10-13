@@ -21,5 +21,9 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
+
+    def after_sign_in_path_for(resource)
+      current_user_path
+    end
   end
 end

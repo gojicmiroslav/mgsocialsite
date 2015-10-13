@@ -54,4 +54,34 @@ Komanda za debuger: debugger
 
 Resetovanje baze: rake db:migrate:reset
 
-nastaviti 01:40
+Kreiranje Devise kontrolera:
+	rails g controller registrations
+	rails g controller sessions
+
+LINKOVI:
+	https://github.com/eliotsykes/rspec-rails-examples
+	https://github.com/RailsApps/rails-devise/tree/master/spec
+	https://github.com/plataformatec/devise/wiki
+	https://github.com/plataformatec/devise
+	https://github.com/jnicklas/capybara	
+
+Dodavanje bootstrap js - u app/assets/javascripts/application.js dodati
+	//= require jquery
+	//= require jquery_ujs
+	//= require bootstrap
+	//= require turbolinks
+	//= require_tree .
+
+
+Debug:
+	print page.html
+	save_and_open_page
+	save_and_open_screenshot
+	page.save_screenshot('screenshot.png')
+	screenshot_and_save_page
+
+TODO:
+	- user_login with valid credentials
+	- refaktorisati hijerarhiju rspec - helperi i ostalo	
+
+nastaviti: 01:56 - Session
