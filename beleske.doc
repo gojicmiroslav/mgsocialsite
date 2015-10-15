@@ -54,6 +54,8 @@ Komanda za debuger: debugger
 
 Resetovanje baze: rake db:migrate:reset
 
+Popunjavanje baze sa podacima iz db.seeds.rb: rake db:seed
+
 Kreiranje Devise kontrolera:
 	rails g controller registrations
 	rails g controller sessions
@@ -81,7 +83,23 @@ Debug:
 	screenshot_and_save_page
 
 TODO:
-	- user_login with valid credentials
 	- refaktorisati hijerarhiju rspec - helperi i ostalo	
 
-nastaviti: 01:56 - Session
+Friendly forwarding - u sesiju upisati 
+	session[:fowrarding_url] = request.url if request.get?
+
+Identifying administrators
+	if current_user.admin?
+  	# do something
+	end
+
+If the page could potentially not have a current_user set then:
+	if current_user.try(:admin?)
+  	# do something
+	end	
+
+The code below can be used to grant admin status to the current user.
+		current_user.update_attribute :admin, true
+		current_user.toggle!(:admin)
+
+nastaviti: 01:47 - Deleting User

@@ -107,6 +107,15 @@ RSpec.feature "User Login", :device do
 		#print user.rememberable_value
 	end
 
+	scenario "friendly forwarding after successful log in" do
+		visit edit_user_registration_path
+		expect(current_path).to eq(new_user_session_path)
+		user = FactoryGirl.create(:user)
+		login(user.email, user.password, false)
+		# vracamo se na pocetni url koji je korisnik uneo
+		expect(current_path).to eq(edit_user_registration_path)
+	end
+
 	private 
 
 	def login(email, password, remember_me)

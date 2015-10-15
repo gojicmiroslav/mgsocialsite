@@ -20,7 +20,9 @@ class SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource)
-    resource
+    url = session[:forwarding_url]
+    session.delete(:forwarding_url)
+    url || resource
   end
 
   # Check if there is no signed in user before doing the sign out.

@@ -1,5 +1,37 @@
 user:
  name: Test User
- email: test@example.com
- password: please123
- password_confirmation: please123 
+ email: test1234@example.com
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+pera:
+ name: Pera Peric
+ email: pera23@gmail.com
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+michael:
+ name: Michael Example
+ email: michael332@example.com
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+archer:
+ name: Sterling Archer
+ email: duchess3322@example.gov
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+lana:
+ name: Lana Kane
+ email: hands32323@example.gov
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+mallory:
+ name: Mallory Archer
+ email: boss222@example.gov
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+
+<% 30.times do |n| %>
+user_<%= n %>:
+ name: <%= "User #{n}" %>
+ email: <%= "user-#{n}@example.com" %>
+ encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+<% end %> 
+

@@ -1,0 +1,21 @@
+<% provide(:title, "All users") %>
+<h1>All Users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+	<% #1.opcija %>
+	<%# @users.each do |user| %>
+		<%#= render 'users/user', user: user %>
+	<%# end %>
+		
+	<% #2. opcija %>
+	<%# @users.each do |user| %>
+		<%#= render user %>
+	<%# end %>
+
+	<% #3.opcija %>	
+	<%= render @users %>
+</ul>
+
+<%= will_paginate %>
