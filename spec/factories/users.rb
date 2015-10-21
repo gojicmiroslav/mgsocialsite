@@ -1,15 +1,31 @@
 FactoryGirl.define do
   
   factory :user do
+    transient do
+      skip_confirmation true
+    end
+
     name "Test User"
-    email "test@example.com"
+    email "miroslavy2k11@gmail.com"
     password "please123"
+    
+    before(:create) do |user, evaluator|
+      user.skip_confirmation! if evaluator.skip_confirmation
+    end
   end
 
   factory :other_user, :parent => :user do
+    transient do
+      skip_confirmation true
+    end
+
     name "Another User"
     email "another@example.com"
     password "please123"
+    
+    before(:create) do |user, evaluator|
+      user.skip_confirmation! if evaluator.skip_confirmation
+    end
   end
 
   factory :michael, :parent => :user do
@@ -31,10 +47,33 @@ FactoryGirl.define do
   end
 
   factory :admin, :parent => :user do
+    transient do
+      skip_confirmation true
+    end
+
     name "Admin User"
     email "admin@admin.com"
     password "please123"
     admin true
+
+    before(:create) do |user, evaluator|
+      user.skip_confirmation! if evaluator.skip_confirmation
+    end    
+  end
+
+  factory :non_skip_user, :parent => :user do
+    transient do
+      skip_confirmation false
+    end
+
+    name "Nonskip User"
+    email { Faker::Internet.email }
+    password "password123"
+    admin false
+
+    before(:create) do |user, evaluator|
+      user.skip_confirmation! if evaluator.skip_confirmation
+    end
   end
 
 end

@@ -27,7 +27,7 @@ RSpec.describe UsersController, type: :controller do
     sign_in other_user
     delete :destroy, id: user
     expect(users).to eq(User.all)
-    expect(response).to redirect_to root_url
+    expect(response).to redirect_to root_path
   end
 
 end

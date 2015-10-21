@@ -2,36 +2,43 @@ user:
  name: Test User
  email: test1234@example.com
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 pera:
  name: Pera Peric
  email: pera23@gmail.com
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 michael:
  name: Michael Example
  email: michael332@example.com
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 archer:
  name: Sterling Archer
  email: duchess3322@example.gov
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 lana:
  name: Lana Kane
  email: hands32323@example.gov
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 mallory:
  name: Mallory Archer
  email: boss222@example.gov
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 
 <% 30.times do |n| %>
 user_<%= n %>:
  name: <%= "User #{n}" %>
  email: <%= "user-#{n}@example.com" %>
  encrypted_password: $2a$10$WRNTmmJ0ClUUtaxjBmZS1OeH.ldcAGGBjrzuoAu2zfnA7uchaBQo2
+ confirmed_at: <%= Time.zone.now %>
 <% end %> 
 

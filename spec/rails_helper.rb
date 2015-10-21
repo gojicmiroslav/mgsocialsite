@@ -16,6 +16,7 @@ require 'capybara/rspec'
 require 'devise'
 require 'capybara-screenshot/rspec'
 require "rack_session_access/capybara"
+require "email_spec"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -48,22 +49,15 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   #Configure Devise
-  config.include Devise::TestHelpers, type: :controller
   config.include Devise::TestHelpers, type: :routing
+  config.include Devise::TestHelpers, :type => :controller
 
-  #This says that before the entire test suite runs, clear the test database out completely. 
-  #This gets rid of any garbage left over from interrupted or poorly-written tests—a common 
-  #source of surprising test behavior.
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
 
   config.before(:each) do |example|
-    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
-    DatabaseCleaner.start
-  end
-
-  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
   end
 
@@ -84,4 +78,7 @@ RSpec.configure do |config|
   end
 
   config.include ShowMeTheCookies, :type => :feature
+
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 end

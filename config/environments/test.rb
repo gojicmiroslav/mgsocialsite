@@ -42,4 +42,6 @@ Rails.application.configure do
 
   # Access to rack session
   config.middleware.use RackSessionAccess::Middleware
+
+  config.action_mailer.default_url_options = { host: 'www.example.com' }
 end

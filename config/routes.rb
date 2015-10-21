@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  get 'confirmations/show'
+
+  get 'confirmations_controller/show'
+
   root 'static_pages#home'
   get  'help'    => 'static_pages#help'
   get  'about'   => 'static_pages#about'
   get  'contact' => 'static_pages#contact'
   #get  'signup'  => 'users#new'
-  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions"}
+  devise_for :users, controllers: { registrations: "registrations", 
+                                    sessions: "sessions"}
   resources :users
 
   # Example of regular route:
