@@ -83,6 +83,11 @@ RSpec.feature "User Signup", :device do
     click_button 'Log In'
     expect(page).to have_text("Logout")
 
+    #Already confirmed email
+    open_email(email)
+    click_first_link_in_email
+    expect(page).to have_content(I18n.t( 'errors.messages.already_confirmed'))
+
     #expect(page.current_path).to have_content('Users')
   end
 
