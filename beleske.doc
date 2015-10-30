@@ -113,6 +113,162 @@ Posle uspesne potvrde na Home stranici se pojavljuje poruka:
 		Your email address has been successfully confirmed.
 	</div>	
 
-TODO: ubaciti I18n Message
+ADVICE - run test suite before deploy on remote server
 
-nastaviti: 01:10 - Password reset
+Kreiranje Micropost modela:
+	- rails g model Micropost content:text user:references
+	- user:references - kazemo Railsu da je ovo strani kljuc(moze i user_id:integer)
+	- ova naredba kreira: model, migraciju ,test, factories
+	- izvrsavanje migracije: rake db:migrate
+
+MULTIPLE KEY INDEX	
+ 	- u migraciji
+	 			add_index :microposts, [:user_id, :created_at]
+
+ 	Any index can give benefit by allowing a query to narrow down the set of rows to examine.
+	A multi-column index can help when your query includes conditions on those multiple columns.
+	For example:
+			SELECT * FROM Mytable WHERE user_id = 123 AND created_at > '2013-02-01'
+
+	The multi-column index narrows down to the subset of rows that are associated with user_id 123, then within that subset, it further narrows down the selection to those with a recent created_at value.
+
+	Without the second column in the index, the RDBMS would have to load all the rows for user_id 123 into memory before it could determine if they pass the criteria.		
+
+ASSOCATIONS
+
+MICROPOST  ==> belongs_to  					 		  has_many <====== USER
+-------------------------    							---------------------
+id       integer	 						------->    id integer
+content  text									|
+user_id  integer 	<-----------|	
+
+ micopost.user    ====================>   user
+ micropost        <====================   user.microposts
+
+This associations gives us useful methodes:
+		- micropost.user  					     - returns the User objectassociated with the micropost
+		- user.microposts 					     - returns a collection of the user's microposts
+		- user.microposts.create(arg)    - creates a micropost associated with the user 
+		- user.microposts.create!(arg)   - creates a micropost associated with the user 
+																		   (exception on failure)
+		- user.microposts.build(arg)     - return a new Micropost object associated with user
+																			 (it doesn't create in database, it creates in memory, analog of  
+																			 new)	
+		- user.microposts.find_by(id: 1) - finds the micropost with id: 1 and user_id equal to user.id
+
+MACRO - default_scope(scope = nil) 
+	Use this macro in your model to set a default scope for all operations on the model.
+
+	class Article < ActiveRecord::Base
+	  default_scope { where(published: true) }
+	end
+
+	Article.all # => SELECT * FROM articles WHERE published = true
+
+
+COUNT vs LENGTH
+ - count vraca broj torki iz baze, length vraca broj elemenata kolekcije
+ - PR.
+ 	@user.count - broj iz baze
+ 	@user.microposts.count - iz baze	
+
+RENDER nesto
+	Ovaj kod(u shared/feed.html.erb):
+		<%= render @feed_items %>
+	radi zato sto Rails trzi klasu od @feed_items, a to je Micropost.Zatim trazi partial
+	u view/micropost/micropost.html.erb	
+	Ime varijable nije bitno, bitna je klasa varijable.
+
+REQUEST.REFERRER
+	request.referrer - returns a full url string.For example:
+			http://www.google.com/adsense
+  We can use Ruby's URI Module to wrap it and then simply ask it for its path:
+		 if URI(request.referer).path == '/adsense'
+	returns: '/adsense'
+
+CARRIERWAVE	
+	- rails g uploader Picture
+	- rails g migration add_picture_to_microposts picture:string
+	- rake db:migrate
+	- Mount uploader(micropost.rb):
+	 		class Micropost < ActiveRecord::Base
+	 			mount_uploader :picture, PictureUploader
+	 		end
+	- Dodati u micropost_form
+			<%= form_for(@micropost, html: { multipart: true }) do |f| %>
+		i 	
+			<span class="picture">
+				<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+			</span>	
+	- RESTARTOVATI SERVER	
+	- Dodati u micropost_controller
+		def micropost_params
+			params.require(:micropost).permit(:content, :picture)
+		end
+	- Securing uploads - picture_uploader.rb:
+		def extension_white_list
+    	%w(jpg jpeg gif png)
+  	end
+  - In micropost model dodajemo custom validaciju	
+  - Resize images - MiniMagick
+  	- u picture_uploader.rb dodajemo
+  		class PictureUploader < CarrierWave::Uploader::Base
+  			include CarrierWave::MiniMagick
+  			process resize_to_fill: [400, 400]
+			end
+
+CUSTOM VALIDATOR IN MODEL
+	- validate :method_name
+	- Example:
+			class Invoice < ActiveRecord::Base
+			  validate :expiration_date_cannot_be_in_the_past,
+			    :discount_cannot_be_greater_than_total_value
+			 
+			  def expiration_date_cannot_be_in_the_past
+			    if expiration_date.present? && expiration_date < Date.today
+			      errors.add(:expiration_date, "can't be in the past")
+			    end
+			  end
+			 
+			  def discount_cannot_be_greater_than_total_value
+			    if discount > total_value
+			      errors.add(:discount, "can't be greater than total value")
+			    end
+			  end
+			end
+
+		By default such validations will run every time you call valid?. It is also possible to control when to run these custom validations by giving an :on option to the validate method, with either: :create or :update.
+		Example:
+			class Invoice < ActiveRecord::Base
+			  validate :active_customer, on: :create
+			 
+			  def active_customer
+			    errors.add(:customer_id, "is not active") unless customer.active?
+			  end
+			end
+
+IMAGE MAGICK - SOLUTION FOR INSTALL			
+	- link: http://stackoverflow.com/questions/30119781/gem-install-rmagick-error
+	- post:
+			- Remove your current ImageMagic folder and rmagick gem
+			- install from http://ftp.sunet.se/pub/multimedia/graphics/ImageMagick/binaries/ the ImageMagick-6.7.9-3 Q16-windows-dll.exe and ImageMagick-6.7.9-2-Q8-windows-static.exe in the same folder (these worked while the most recent ones don't)
+			- in your console window set path=d:\ImageMagick;%path%
+			- gem install rmagick -- '--with-opt-dir="d:\ImageMagick"'
+			I installed ImageMagick obviously in d:\ImageMagick, so adapt for your situation. This worked for my Ruby 1.9.3 under Windows 7, success !
+
+
+ENVIRONMENT
+	- Povera koji je evironment
+		- if Rails.env.production?
+
+=============================================================================================================
+
+nastaviti - 01:38 - Micropost Images
+(01:53 - lesson 11 - Image Production in production)
+
+TODO:
+	1. TODO: ubaciti I18n Message - TEST
+	2. popraviti(lession 11 - 01:19), dodati prikaz(feed) postova u slucaju unosa praznog posta.
+		 Trenutno se prikazuje prazan niz @feed_items = []. Treba da se prikazu postovi trenutnog korisnika
+		 Problem pravi will_paginate, kada se klikne na page=2
+

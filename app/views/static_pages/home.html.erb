@@ -1,17 +1,29 @@
-<div class="center jumbotron">
-	<h1>MG Social Site</h1>
+<% if user_signed_in? %>
+	<div class="row">
+		<aside class="col-md-4">
+			<section class="user-info">
+				<%= render 'shared/user_info' %>	
+			</section>
+			<section class="micropost-form">
+				<%= render 'shared/micropost_form' %>	
+			</section>
+		</aside>	
+		<div class="col-md-8">
+			<h3>Micropost feed</h3>
+			<%= render 'shared/feed' %>
+		</div>
+	</div>
+<% else %>
+	<div class="center jumbotron">
+		<h1>MG Social Site</h1>
 
-	<h2>
-		This is Home page for Social Site.
-	</h2>
+		<h2>
+			This is Home page for Social Site.
+		</h2>
 
-	<% if user_signed_in? %>
-		<%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-primary" %>
-		<%= link_to 'Edit', edit_user_registration_path, class: "btn btn-lg btn-primary" %>
-	<% else %>
-			<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-			<%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-primary" %>
-	<% end %>
-</div>
+		<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+		<%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-primary" %>
+	</div>
 
-<%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/' %>
+	<%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/' %>
+<% end %>

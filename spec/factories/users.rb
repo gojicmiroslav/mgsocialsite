@@ -6,7 +6,7 @@ FactoryGirl.define do
     end
 
     name "Test User"
-    email "miroslavy2k11@gmail.com"
+    email "user11@gmail.com"
     password "please123"
     
     before(:create) do |user, evaluator|
@@ -19,20 +19,14 @@ FactoryGirl.define do
       skip_confirmation true
     end
 
-    name "Another User"
-    email "another@example.com"
+    name "Other User"
+    email "other123@example.com"
     password "please123"
     
     before(:create) do |user, evaluator|
       user.skip_confirmation! if evaluator.skip_confirmation
     end
   end
-
-  factory :michael, :parent => :user do
-    name "michael Example"
-    email "michael123@example.com"
-    password "please123"
-  end  
 
   factory :john, :parent => :user do
     name "John User"
@@ -71,6 +65,30 @@ FactoryGirl.define do
     password "password123"
     admin false
 
+    before(:create) do |user, evaluator|
+      user.skip_confirmation! if evaluator.skip_confirmation
+    end
+  end
+
+  factory :miroslav, :parent => :user do 
+    transient do
+      skip_confirmation true
+    end
+
+    name "Miroslav Gojic"
+    email { Faker::Internet.email }
+    password "123greetings"
+
+    factory :user_with_posts do
+      transient do
+        microposts_count 50 
+      end
+
+      after(:create) do |user, evaluator|
+        create_list(:micropost, evaluator.microposts_count, user: user)
+      end
+    end
+    
     before(:create) do |user, evaluator|
       user.skip_confirmation! if evaluator.skip_confirmation
     end

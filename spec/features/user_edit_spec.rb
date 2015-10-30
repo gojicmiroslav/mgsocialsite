@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "User Edit", :device do
 
-	scenario "unsuccessful edit" do
-		user = FactoryGirl.create(:user)		
+	let(:user){ FactoryGirl.create(:user) }
+
+	scenario "unsuccessful edit" do	
 		login_as(user, :scope => :user)
 		visit edit_user_registration_path(user)
 		fill_in 'Email', :with => 'newemail@invalid'
@@ -13,7 +14,6 @@ RSpec.feature "User Edit", :device do
 	end
 
 	scenario "successful edit" do
-		user = FactoryGirl.create(:user)		
 		login_as(user, :scope => :user)
 		visit edit_user_registration_path(user)
 		fill_in 'Email', :with => 'newemail@valid.com'

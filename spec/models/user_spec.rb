@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   
-  context "validation" do
+  context "validation" do  	
   	before do
   		@user = User.new(name: "Example User", email: "user@example.com",
   										 password: "foobar123", password_confirmation: "foobar123")
@@ -43,6 +43,19 @@ RSpec.describe User, type: :model do
 			end										
 		end
 
+	end
+
+	context "destroy dependent micropost" do
+		before do
+		 @user = FactoryGirl.create(:user)
+		end
+
+		it "should destroy assosiated micropost" do
+			#@user.save
+			@user.microposts.create(content: "Lorem Ipsum")
+
+			expect { @user.destroy }.to change{ Micropost.count }.by(-1)
+		end
 	end
 end
 

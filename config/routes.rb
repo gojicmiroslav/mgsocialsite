@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations", 
                                     sessions: "sessions"}
   resources :users
+  resources :microposts, only: [:create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

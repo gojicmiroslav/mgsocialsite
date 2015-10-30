@@ -52,18 +52,21 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :routing
   config.include Devise::TestHelpers, :type => :controller
 
+
+  # DATABASE CLEANER===========================================================
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
 
   config.before(:each) do |example|
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
   end
+  #=============================================================================
 
   config.include Features::SessionHelpers, type: :feature
 
