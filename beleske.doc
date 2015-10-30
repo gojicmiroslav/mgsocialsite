@@ -256,7 +256,6 @@ IMAGE MAGICK - SOLUTION FOR INSTALL
 			- gem install rmagick -- '--with-opt-dir="d:\ImageMagick"'
 			I installed ImageMagick obviously in d:\ImageMagick, so adapt for your situation. This worked for my Ruby 1.9.3 under Windows 7, success !
 
-
 ENVIRONMENT
 	- Povera koji je evironment
 		- if Rails.env.production?
