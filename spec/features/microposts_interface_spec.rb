@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "Micropost interface", :device do
-	#fixtures :microposts
 
 	let(:user){ FactoryGirl.create(:user_with_posts) }
 	let(:microposts){ Micropost.count }

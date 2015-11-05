@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.feature "Relationships", type: :feature do
 	fixtures :users
-	#fixtures :relationships
+	fixtures :relationships
 
 	let(:user){ users(:miroslav) }
 	let(:other_user){ users(:pera) }
 
-	xscenario "following page" do
+	scenario "following page" do
 		signin(user.email, "password")
 		click_on "following"
 		expect(user.following.count).not_to eq(0)
@@ -18,7 +18,7 @@ RSpec.feature "Relationships", type: :feature do
 		end
 	end
 
-	xscenario "followers page" do
+	scenario "followers page" do
 		signin(user.email, "password")
 		click_on "followers"
 		expect(user.followers.count).not_to eq(0)
@@ -44,14 +44,5 @@ RSpec.feature "Relationships", type: :feature do
 			find("input[name=commit]").click
 		end.to change(Relationship, :count).by(-1)
 	end
-
-	private
-
-  def signin(email, password)
-    visit new_user_session_path
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    click_button 'Log In'
-  end
 
 end

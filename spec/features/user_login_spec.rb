@@ -2,15 +2,12 @@ require 'rails_helper'
 
 RSpec.feature "User Login", :device do
 
-	scenario "login with invalid information" do
-		#visit '/'
-		#click_link "Sign In"
-		#expect(page).to have_css("h1", text: "Log In")
+	scenario "login with invalid information" do		
 		visit new_user_session_path
 		expect(page).to have_css("h1", text: "Log In")
 		expect(page).to have_title("Log In | MG Social Site")
 
-		login("someone@invalid", "somepassword", false)
+		signin("someone@invalid", "somepassword", false)
 
 		expect(page).not_to have_content("Signed in successfully.")
 		expect(page).to have_content("Invalid email or password.")
@@ -31,7 +28,7 @@ RSpec.feature "User Login", :device do
 		expect(page).to have_css("h1", text: "Log In")
 		expect(page).to have_title("Log In | MG Social Site")
 
-		login(user.email, user.password, false)
+		signin(user.email, user.password, false)
 		
 		expect(page).to have_content("Signed in successfully.")
 		expect(page).not_to have_content("Invalid email or password.")
@@ -54,9 +51,8 @@ RSpec.feature "User Login", :device do
 		expect(page).to have_css("h1", text: "Log In")
 		expect(page).to have_title("Log In | MG Social Site")
 
-		login(user.email, user.password, true)
+		signin(user.email, user.password, true)
 
-		#expect(session[:user_id]).not_to be_nil
 		expect(get_me_the_cookie("remember_user_token")).not_to be_nil
 		
 		expect(page).to have_content("Signed in successfully.")
@@ -85,9 +81,8 @@ RSpec.feature "User Login", :device do
 		expect(page).to have_css("h1", text: "Log In")
 		expect(page).to have_title("Log In | MG Social Site")
 
-		login(user.email, user.password, false)
+		signin(user.email, user.password, false)
 
-		#expect(session[:user_id]).not_to be_nil
 		expect(get_me_the_cookie("remember_user_token")).to be_nil
 		
 		expect(page).to have_content("Signed in successfully.")
@@ -111,22 +106,9 @@ RSpec.feature "User Login", :device do
 		visit edit_user_registration_path
 		expect(current_path).to eq(new_user_session_path)
 		user = FactoryGirl.create(:user)
-		login(user.email, user.password, false)
+		signin(user.email, user.password, false)
 		# vracamo se na pocetni url koji je korisnik uneo
 		expect(current_path).to eq(edit_user_registration_path)
 	end
-
-	private 
-
-	def login(email, password, remember_me)
-		fill_in 'Email', with: email
-		fill_in 'Password', with: password
-		check("Remember me") if remember_me
-		click_button "Log In"
-	end
-
-	def logged_as(user)
-    page.set_rack_session('warden.user.user.key' => User.serialize_into_session(user).unshift("User"))
-  end
 
 end

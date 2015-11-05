@@ -15,11 +15,4 @@ RSpec.feature "User Profile", :device do
 		expect(page).to have_content(user.microposts.count.to_s)
 		expect(page).to have_css("div.pagination")
 	end
-
-	def signin(email, password)
-    visit new_user_session_path
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    click_button 'Log In'
-  end
 end

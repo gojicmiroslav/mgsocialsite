@@ -90,14 +90,5 @@ RSpec.feature "User Signup", :device do
 
     #expect(page.current_path).to have_content('Users')
   end
-
-	private
-
-	def sign_up(name, email, password, password_confirmation, link_button)
-		fill_in 'Name',  with: name
-		fill_in 'Email', with: email
-		fill_in 'Password', with: password
-		fill_in 'Password confirmation', with: password_confirmation
-		click_button link_button
-	end
+	
 end

@@ -16,13 +16,5 @@ RSpec.feature "Site layout", :type => :feature do
     signin('invalid@email.com', user.password)
     expect(page).to have_content I18n.t 'devise.failure.not_found_in_database', authentication_keys: 'email'
   end
-
-  private
-
-  def signin(email, password)
-    visit new_user_session_path
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    click_button 'Log In'
-  end
+  
 end
