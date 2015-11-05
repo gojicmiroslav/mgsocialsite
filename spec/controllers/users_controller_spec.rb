@@ -30,4 +30,14 @@ RSpec.describe UsersController, type: :controller do
     expect(response).to redirect_to root_path
   end
 
+  it "should redirect following when not logged in" do
+    get :following, id: user
+    expect(response).to redirect_to new_user_session_path
+  end
+
+  it "should redirect followers when not logged in" do
+    get :followers, id: user
+    expect(response).to redirect_to new_user_session_path
+  end
+
 end

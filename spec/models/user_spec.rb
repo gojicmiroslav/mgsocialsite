@@ -57,5 +57,52 @@ RSpec.describe User, type: :model do
 			expect { @user.destroy }.to change{ Micropost.count }.by(-1)
 		end
 	end
+
+	context "follow and unfollow" do
+		before do
+	 		@user = FactoryGirl.create(:user)
+	 		@other_user = FactoryGirl.create(:other_user)
+		end
+
+		it "should follow and unfollow user" do
+			expect(@user.following?(@other_user)).to be false 
+			@user.follow(@other_user)
+			expect(@user.following?(@other_user)).to be true 
+			# @other-user's followers should include @user
+			expect(@other_user.followers.include?(@user)).to be true
+			@user.unfollow(@other_user)
+			expect(@user.following?(@other_user)).to be false 
+			# @other-user's followers should NOT include @user
+			expect(@other_user.followers.include?(@user)).to be false
+		end
+	end
+
+	context "feed" do
+		fixtures :users
+		fixtures :microposts
+		fixtures :relationships
+
+		let(:miroslav){ users(:miroslav) }
+		let(:archer){ users(:archer) }
+		let(:lana){ users(:lana) }
+		
+		it "should have the right posts" do
+			# Posts from followed user
+			lana.microposts.each do |post_following|
+				expect(miroslav.feed).to include(post_following)
+			end
+
+			# Posts from self
+			miroslav.microposts.each do |post_self|
+				expect(miroslav.feed).to include(post_self)
+			end
+
+			# Posts from unfollowed user
+			archer.microposts.each do |post_unfollowed|
+				expect(miroslav.feed).not_to include(post_unfollowed)
+			end
+		end
+	end
+
 end
 

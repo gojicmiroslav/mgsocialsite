@@ -9,9 +9,16 @@ Rails.application.routes.draw do
   get  'contact' => 'static_pages#contact'
   #get  'signup'  => 'users#new'
   devise_for :users, controllers: { registrations: "registrations", 
-                                    sessions: "sessions"}
-  resources :users
+                                    sessions: "sessions"}                                
+
+  resources :users do
+    member do
+      get "following", to: "users#following"  
+      get "followers", to: "users#followers"  
+    end
+  end
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

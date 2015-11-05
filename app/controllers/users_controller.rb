@@ -20,6 +20,20 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def following
+    @title = 'Following'
+    @user = params[:id] != nil ? User.find(params[:id]) : current_user
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = 'Followers'
+    @user = params[:id] != nil ? User.find(params[:id]) : current_user
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
 
   def incorrect_user_path_for

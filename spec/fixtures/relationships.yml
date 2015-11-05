@@ -1,0 +1,15 @@
+one:
+ follower: miroslav
+ followed: lana
+
+two:
+ follower: miroslav
+ followed: mallory
+
+three:
+ follower: lana
+ followed: miroslav
+
+four:
+ follower: archer
+ followed: miroslav

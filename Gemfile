@@ -24,6 +24,7 @@ gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
 gem 'database_cleaner', '~> 1.5.0'
 
+
 group :development, :test do
   gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rspec-rails', '~> 3.0'
@@ -36,6 +37,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem "show_me_the_cookies"
   gem 'rack_session_access'
+  gem 'selenium-webdriver', '~> 2.48', '>= 2.48.1'
 end
 
 group :development do

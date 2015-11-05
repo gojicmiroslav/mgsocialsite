@@ -260,9 +260,88 @@ ENVIRONMENT
 	- Povera koji je evironment
 		- if Rails.env.production?
 
-=============================================================================================================
+FOLLOWING
+	- user.following - korisnici koje mi pratimo
+	- user.followers - korisnici koji nas prate
 
-nastaviti - 01:38 - Micropost Images
+	Koraci:
+		- generisemo model:
+				rails g model Relationship follower_id:integer followed_id:integer		
+
+
+ASSOCIATION - FOLLOWER <-> FOLLOWED				
+
+	class User < ActiveRecord::Base
+		...
+		has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+		...
+	end
+
+	class Relationship < ActiveRecord::Base
+		belongs_to :follower, class_name: "User"
+		belongs_to :followed, class_name: "User"
+	end
+
+	Metode:
+		- active_relationships.follower - return the follower 
+		- active_relationships.followed - returns the followed user
+		- active_relationships.create(followed_id: user.id) - create an active_relationships associated with user
+		- active_relationships.create!(followed_id: user.id) - create an active_relationships associated with user
+																													(exception on failure)
+		- active_relationships.build(followed_id: user.id) - returns a new Relationships object associated with 
+																												 user																																
+
+HAS_MANY - :source
+	The :source option specifies the source association name for a has_many :through association. You only need to use this option if the name of the source association cannot be automatically inferred from the association name.
+ 	It is a column name on "through" table		
+
+
+LINK - http://localhost:3000/users/1/following 	
+
+AJAX
+	- form_for is a helper that assists with writing forms. form_for takes a :remote option. It works like this:
+		<%= form_for(@article, remote: true) do |f| %>
+		  ...
+		<% end %>				
+	This will generate the following HTML:
+		<form accept-charset="UTF-8" action="/articles" class="new_article" data-remote="true" id="new_article" method="post">
+	  ...
+		</form>			
+	Note the data-remote="true". Now, the form will be submitted by Ajax rather than by the browser's normal submit mechanism.
+	
+	Now we have rearange for relationships controller to respond to AJAX.																					def create
+				user = User.find(params[:followed_id])
+				current_user.follow(user)
+				
+				respond_to do |format|
+					format.html { redirect_to user}
+					format.js {}
+				end
+			end
+
+	Notice the format.js in the respond_to block; that allows the controller to respond to your Ajax request. You then have a corresponding app/views/users/create.js.erb view file that generates the actual JavaScript code that will be sent and executed on the client side.		
+
+PROBLEM - ukoliko iskljucimo java script u browseru, moramo dodati u config/application.eb
+		# Include the authenticity token in remote form(AJAX).
+    config.action_view.embed_authenticity_token_in_remote_forms = true	
+
+FEED
+	user = User.first
+	user.following.map(&:id) # uzimamo sve id
+
+	Rails ovo obezbedjuje out-of-the-box
+		user.following_ids
+
+
+PRACENJE LOGA iz KONZOLE
+	tail -f log/test.log
+
+
+
+==========================================================================================================
+
+nastaviti - 01:47
+http://rails-3-2.railstutorial.org/book
 (01:53 - lesson 11 - Image Production in production)
 
 TODO:
@@ -270,4 +349,5 @@ TODO:
 	2. popraviti(lession 11 - 01:19), dodati prikaz(feed) postova u slucaju unosa praznog posta.
 		 Trenutno se prikazuje prazan niz @feed_items = []. Treba da se prikazu postovi trenutnog korisnika
 		 Problem pravi will_paginate, kada se klikne na page=2
+	3. Dodati dugme za dodavanje jos slika za POST - Add New Image, tako da post moze da sadrzi vise slika.	 
 
