@@ -18,13 +18,13 @@ RSpec.describe RegistrationsController, type: :controller do
   	expect(flash).not_to be_nil
   	expect(controller).to set_flash[:alert]
   	expect(flash[:alert]).to eq("You need to sign in or sign up before continuing.")
-  	expect(response).to redirect_to('/users/sign_in')
+  	expect(response).to redirect_to new_user_session_path
   end
 
   it "should redirect update when not logged in" do
   	@user = FactoryGirl.create(:user)
   	patch :update, id: @user, user: { name: @user.name, email: @user.email }
-  	expect(response).to redirect_to('/users/sign_in')
+  	expect(response).to redirect_to new_user_session_path
   end
 
 end

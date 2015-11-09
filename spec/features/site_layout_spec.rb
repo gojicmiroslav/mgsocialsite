@@ -10,8 +10,8 @@ RSpec.describe "Site layout", :type => :feature do
 			expect(page).to have_link("Help", :href => help_path)
 			expect(page).to have_link("About", :href => about_path)
 			expect(page).to have_link("Contact", :href => contact_path)
-			expect(page).to have_link("", :href => new_user_session_path)
-			expect(page).to have_link("", :href => new_user_registration_path)
+			expect(page).to have_link("", :href => login_path)
+			expect(page).to have_link("", :href => register_path)
 		end	
 
 	end

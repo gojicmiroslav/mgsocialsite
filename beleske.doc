@@ -336,7 +336,12 @@ FEED
 PRACENJE LOGA iz KONZOLE
 	tail -f log/test.log
 
-
+CUSTOM ROUTE IN DEVISE
+	devise_scope :user do
+    # as: :login -> named route, now we can use register_path
+    get "login", to: "devise/sessions#new", as: :login 
+    get "register", to: "devise/registrations#new", as: :register
+  end
 
 ==========================================================================================================
 

@@ -8,8 +8,15 @@ Rails.application.routes.draw do
   get  'about'   => 'static_pages#about'
   get  'contact' => 'static_pages#contact'
   #get  'signup'  => 'users#new'
-  devise_for :users, controllers: { registrations: "registrations", 
-                                    sessions: "sessions"}                                
+  devise_for :users, 
+              controllers: { registrations: "registrations", sessions: "sessions"}                     
+
+  devise_scope :user do
+    # as: :login -> named route, now we can use register_path
+    get    "login"    => "devise/sessions#new",      as: :login 
+    get    "register" => "devise/registrations#new", as: :register
+    delete "logout"   => "devise/sessions#destroy",  as: :logout
+  end                                  
 
   resources :users do
     member do

@@ -22,7 +22,7 @@ RSpec.feature "User Signup", :device do
 		visit "/"
 		click_link "Sign Up"
 		expect(page).to have_css("h1", text: "Sign Up")
-		expect(current_path).to eq(new_user_registration_path)
+		expect(current_path).to eq(register_path)
 
 		#visit new_user_registration_path
 		#before_count = User.count
