@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "User Signup", :device do
+RSpec.feature "User Signup", :feature do
 	
 	given(:invalid_user) do
 		User.create(name: "", 
