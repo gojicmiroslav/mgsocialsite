@@ -18,6 +18,10 @@ RSpec.describe User, type: :model do
 	  it { should validate_length_of(:name).is_at_most(50) }
 	  it { should validate_uniqueness_of(:email).case_insensitive }
 	  it { should validate_length_of(:password).is_at_least(5) }
+	  it { should have_many(:active_relationships)}
+	  it { should have_many(:passive_relationships)}
+	  it { should have_many(:following)}
+	  it { should have_many(:followers)}
 
 	  # Ovde ima bag
 	  xit 'email with invalid format is invalid' do

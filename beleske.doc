@@ -343,6 +343,11 @@ CUSTOM ROUTE IN DEVISE
     get "register", to: "devise/registrations#new", as: :register
   end
 
+PRETEND FLAG -p
+	- pregled sta ce se sve generisati sa komandom, bez generisanja.
+	Primer:
+			rails g model myModel -p  
+
 ==========================================================================================================
 
 nastaviti - 01:47
