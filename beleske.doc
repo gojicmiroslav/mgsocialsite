@@ -19,7 +19,7 @@ U Rubiju je ovo isto:
 	# first_name i last_name tehnicki nisu simboli, ali se konvertuju u simbole
 	h2 = { first_name: "Misa", last_name: "Gojic"}
 
-Primeri za Hes params:
+Primeri za Hesh params:
 	params = {}
 	params[:user] = { first_name: "Misa", last_name: "Gojic" }
 	params[:user][:first_name] # Misa
