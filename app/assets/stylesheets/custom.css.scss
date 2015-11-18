@@ -116,6 +116,8 @@ footer {
 	margin-top:45px;
   background-color:#f5e5e5;
 	@include box_sizing;
+	position:fixed;
+	bottom:0;
 }
 
 /* sidebar */
@@ -316,4 +318,44 @@ span.picture {
 .user:hover {
 	background: #F0F0F0;
 }
+
+.front-bg {
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  left:0%;
+  background: #000;
+  z-index:-99999;
+}
+
+.front-bg img {
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.front-welcome h1{
+	color: #fff;
+  font-size: 38px;
+  line-height: 80px;
+  margin-bottom: 30px;
+  text-shadow: none;
+  margin-left: -140px;
+}
+
+.front-welcome p{
+	color: #fff;
+  font-size: 21px;
+  line-height: 31px;
+  text-shadow: none;
+}
+
+.front-signin{
+	margin-top:30px;
+}
+
 

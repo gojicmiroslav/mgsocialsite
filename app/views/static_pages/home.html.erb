@@ -17,16 +17,64 @@
 		</div>
 	</div>
 <% else %>
-	<div class="center jumbotron">
-		<h1>MG Social Site</h1>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="front-welcome">
+					<h1>Welcome to MG Social Site</h1>
 
-		<h2>
-			This is Home page for Social Site.
-		</h2>
+					<p>
+						Connect with your friends — and other fascinating people. Get in-the-moment updates on the things that interest you. And watch events unfold, in real time, from every angle.
+					</p>
+				</div>
+			</div>
+			
+			<div class="col-md-6 front-signin">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="well well-sm">
+							<form>
+							  <div class="form-group">
+							    <label for="exampleInputEmail1">Email address</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">Password</label>
+							    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+							  </div>
+							  <%= link_to "Sign In", login_path, class: "btn btn-lg btn-primary" %>
+							</form>			
+						</div>
+					</div>	
 
-		<%= link_to "Sign Up", register_path, class: "btn btn-lg btn-primary" %>
-		<%= link_to "Sign In", login_path, class: "btn btn-lg btn-primary" %>
-	</div>
+					<div class="col-md-8 col-md-offset-2">
+					<div class="well well-sm">
+						<h4>New to MG Social Site? Sign up</h4>
+						<form>
+						  <div class="form-group">
+						    <label for="exampleInputEmail1">Email address</label>
+						    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputEmail1">Email address</label>
+						    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						  </div>
+						  <%= link_to "Sign Up", register_path, class: "btn btn-lg btn-primary" %>
+						</form>			
+					</div>
+					</div>
 
-	<%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/' %>
+				</div>
+			</div>
+		</div>
+
+		
 <% end %>
