@@ -1,0 +1,15 @@
+$(document).ready(function(){
+	$(".status").hover(function(){
+  	$(this).toggleClass("hover");
+	});
+
+	$.backstretch([
+		"<%= asset_path("background1.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background2.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background3.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background4.jpg", alt: "Rails logo") %>"
+	], {duration: 3000, fade: 750});
+
+});
+
+
