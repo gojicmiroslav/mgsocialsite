@@ -14,16 +14,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name,:email, :password, :password_confirmation)}
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password) }
   end
+
+  layout :layout_by_resource
   
   def layout_by_resource
-    if devise_controller?
-      "device_layout"
+    if devise_controller? && resource_name == :user
+      "devise_layout"
     else
       "application"
-    end
-
-    def after_sign_in_path_for(resource)
-      current_user_path
     end
   end
 end

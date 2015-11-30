@@ -17,7 +17,6 @@
 		</div>
 	</div>
 <% else %>
-		
 		<div class="row">
 			<div class="col-md-6">
 				<div class="front-welcome">
@@ -33,48 +32,19 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="well well-sm">
-							<form>
-							  <div class="form-group">
-							    <label for="exampleInputEmail1">Email address</label>
-							    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							  </div>
-							  <div class="form-group">
-							    <label for="exampleInputPassword1">Password</label>
-							    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-							  </div>
-							  <%= link_to "Sign In", login_path, class: "btn btn-lg btn-primary" %>
-							</form>			
+							<%= render 'users/forms/session_form' %>			
 						</div>
 					</div>	
 
 					<div class="col-md-8 col-md-offset-2">
 					<div class="well well-sm">
 						<h4>New to MG Social Site? Sign up</h4>
-						<form>
-						  <div class="form-group">
-						    <label for="exampleInputEmail1">Email address</label>
-						    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-						  </div>
-						  <div class="form-group">
-						    <label for="exampleInputEmail1">Email address</label>
-						    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-						  </div>
-						  <div class="form-group">
-						    <label for="exampleInputPassword1">Password</label>
-						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-						  </div>
-						  <div class="form-group">
-						    <label for="exampleInputPassword1">Password</label>
-						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-						  </div>
-						  <%= link_to "Sign Up", register_path, class: "btn btn-lg btn-primary" %>
-						</form>			
+						<hr />
+						<%= render 'users/forms/register_new_form' %>		
 					</div>
 					</div>
 
 				</div>
 			</div>
 		</div>
-
-		
 <% end %>

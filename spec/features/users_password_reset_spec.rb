@@ -60,7 +60,7 @@ RSpec.feature "User Signup", :device do
 
     expect(page).to have_content(I18n.t("devise.passwords.updated"))
     first(:link, "Logout").click
-    first(:link, "Sign In").click
+    first(:link, "Log In").click
 
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: new_password

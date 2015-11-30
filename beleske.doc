@@ -26,7 +26,7 @@ Primeri za Hesh params:
 
 Inspect
 	puts user.inspect	
-	# isto to
+	# isto sto
 	p user	
 
 Lokacija za slike: app/assets/images	
@@ -359,5 +359,7 @@ TODO:
 	2. popraviti(lession 11 - 01:19), dodati prikaz(feed) postova u slucaju unosa praznog posta.
 		 Trenutno se prikazuje prazan niz @feed_items = []. Treba da se prikazu postovi trenutnog korisnika
 		 Problem pravi will_paginate, kada se klikne na page=2
-	3. Dodati dugme za dodavanje jos slika za POST - Add New Image, tako da post moze da sadrzi vise slika.	 
+	3. Dodati dugme za dodavanje jos slika za POST - Add New Image, tako da post moze da sadrzi vise slika.
+	4. Dodati OmniAuth logovanje	
+	5. Napraviti JS slide za background images 
 

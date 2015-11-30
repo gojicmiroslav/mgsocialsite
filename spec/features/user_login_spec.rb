@@ -22,7 +22,7 @@ RSpec.feature "User Login", :device do
 		user = FactoryGirl.create(:user)
 
 		visit "/"
-		expect(page).to have_content("Sign In")
+		expect(page).to have_content("Log In")
 
 		visit new_user_session_path
 		expect(page).to have_css("h1", text: "Log In")
@@ -43,9 +43,6 @@ RSpec.feature "User Login", :device do
 
 	scenario "login with remembering" do
 		user = FactoryGirl.create(:user)
-
-		visit "/"
-		expect(page).to have_content("Sign In")
 
 		visit new_user_session_path
 		expect(page).to have_css("h1", text: "Log In")
@@ -74,9 +71,6 @@ RSpec.feature "User Login", :device do
 	scenario "login without remembering" do
 		user = FactoryGirl.create(:user)
 
-		visit "/"
-		expect(page).to have_content("Sign In")
-
 		visit new_user_session_path
 		expect(page).to have_css("h1", text: "Log In")
 		expect(page).to have_title("Log In | MG Social Site")
@@ -94,7 +88,7 @@ RSpec.feature "User Login", :device do
 		visit "/"
 
 		expect(page).not_to have_content("Logout")
-		expect(page).to have_content("Sign In")
+		expect(page).to have_content("Register")
 
 		#show_me_the_cookies
 		#print get_me_the_cookies
@@ -109,6 +103,44 @@ RSpec.feature "User Login", :device do
 		signin(user.email, user.password, false)
 		# vracamo se na pocetni url koji je korisnik uneo
 		expect(current_path).to eq(edit_user_registration_path)
+	end
+
+	scenario "login with form in front page without remembering" do
+		user = FactoryGirl.create(:user)
+
+		visit "/"
+		expect(page).to have_content("Log In")
+
+		signin(user.email, user.password, false)
+		
+		expect(page).to have_content(I18n.t 'devise.sessions.signed_in')
+		expect(page).not_to have_content(I18n.t 'devise.failure.invalid')
+		expect(page).to have_css('div.alert', text: I18n.t('devise.sessions.signed_in'))
+
+		click_on "Logout"
+
+		expect(page).to have_content(I18n.t 'devise.sessions.signed_out')
+		expect(page).to have_css('div.alert')
+		expect(page.current_url).to eq(root_url)
+	end
+
+	scenario "login with form in front page with remembering" do
+		user = FactoryGirl.create(:user)
+		visit "/"
+
+		signin(user.email, user.password, true)
+
+		expect(get_me_the_cookie("remember_user_token")).not_to be_nil
+		
+		expect(page).to have_content(I18n.t 'devise.sessions.signed_in')
+		expect(page).not_to have_content(I18n.t 'devise.failure.invalid')
+		expect(page).to have_css('div.alert', text: I18n.t('devise.sessions.signed_in'))
+
+		expire_cookies
+
+		visit "/"
+
+		expect(page).to have_content("Logout")
 	end
 
 end

@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.feature "User Signup", :feature do
 	
-	given(:invalid_user) do
+	let(:invalid_user) do
 		User.create(name: "", 
 								email: 'user@invalid', 
 								password: 'foo',
 								password_confirmation: "bar") 
 	end
 
-	given(:valid_user) do
+	let(:valid_user) do
 		User.create(name: "Test User",
 								email: "test@gmail.com",
 								password: "password",
@@ -18,10 +18,9 @@ RSpec.feature "User Signup", :feature do
 
 	let(:non_skip_user){ FactoryGirl.build(:non_skip_user) }
 
-	scenario "invalid signup information" do
+	scenario "invalid register information" do
 		visit "/"
-		click_link "Sign Up"
-		expect(page).to have_css("h1", text: "Sign Up")
+		click_link "Register"
 		expect(current_path).to eq(register_path)
 
 		#visit new_user_registration_path
@@ -33,9 +32,9 @@ RSpec.feature "User Signup", :feature do
 		end.not_to change{User.count}
 	end
 
-	scenario "valid signup information should change database" do
+	scenario "valid register information should change database" do
 		visit new_user_registration_path
-		expect(page).to have_content("Sign Up")
+		expect(page).to have_content("Register")
 
 		expect do
 			sign_up(valid_user.name, valid_user.email, valid_user.password, 
@@ -43,7 +42,7 @@ RSpec.feature "User Signup", :feature do
 		end.to change{User.count}.from(User.count).to(User.count + 1)
 	end
 
-	scenario 'visitor can sign up with valid email address and password' do
+	scenario 'visitor can register with valid email address and password' do
 		visit new_user_registration_path
 		reset_mailer
 
@@ -62,7 +61,7 @@ RSpec.feature "User Signup", :feature do
     expect(page).to have_content(/.*#{txts[0]}.*|.*#{txts[1]}.*/)
 
     # Try to login before activation
-    first(:link, "Sign In").click
+    first(:link, "Log In").click
     fill_in 'user_email', with: email
     fill_in 'user_password', with: password
     click_button 'Log In'
@@ -89,6 +88,28 @@ RSpec.feature "User Signup", :feature do
     expect(page).to have_content(I18n.t( 'errors.messages.already_confirmed'))
 
     #expect(page.current_path).to have_content('Users')
+  end
+
+  scenario "user register with form on front page" do
+  	visit root_path
+
+  	#Creating credentials
+		name = "Test User"
+		email = Faker::Internet.email
+		password = "password"
+
+		# Name	
+		fill_in 'Name',  with: name
+		# Email
+		find('#new_user').find("input[id$='user_email']").set email
+		#Password
+		find('#new_user').find("input[id$='user_password']").set password		
+		#Password Confirmation
+		fill_in 'Password confirmation', with: password
+		click_button "Create my account"
+    txts = [I18n.t( 'devise.registrations.signed_up'), 
+    				I18n.t( 'devise.registrations.signed_up_but_unconfirmed')]
+    expect(page).to have_content(/.*#{txts[0]}.*|.*#{txts[1]}.*/)
   end
 	
 end

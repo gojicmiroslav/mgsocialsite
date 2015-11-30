@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+
+  layout "static_layout", except: :home
   
   def home
   	if user_signed_in?

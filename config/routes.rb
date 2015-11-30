@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'confirmations/show'
-
   get 'confirmations_controller/show'
 
   root 'static_pages#home'

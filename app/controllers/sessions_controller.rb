@@ -1,5 +1,7 @@
 class SessionsController < Devise::SessionsController
 
+  layout "devise_layout"
+
   protected
 
   def after_sign_in_path_for(resource)
