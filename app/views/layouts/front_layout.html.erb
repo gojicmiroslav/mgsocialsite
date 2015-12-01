@@ -18,7 +18,16 @@
 		<%= render 'layouts/footer' %>	
 	</div>
 
+
 	<%= debug(params) if Rails.env.development? %>
 
+<script>
+	$.backstretch([
+		"<%= asset_path("background1.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background2.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background3.jpg", alt: "Rails logo") %>",
+		"<%= asset_path("background4.jpg", alt: "Rails logo") %>"
+	], {duration: 3000, fade: 750});
+</script>
 </body>
 </html>

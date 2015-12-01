@@ -37,7 +37,6 @@ RSpec.feature "User Login", :device do
 		click_on "Logout"
 
 		expect(page).to have_content("Signed out successfully.")
-		expect(page).to have_css('div.alert')
 		expect(page.current_url).to eq(root_url)
 	end
 
