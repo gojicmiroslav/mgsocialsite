@@ -1,12 +1,23 @@
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h4><%= link_to current_user.name, current_user %></h4>
+	</div>
+	
+	<div class="panel-body">
+		<div class="row profile-w">
+			<div class="col-md-10">
+				<%= link_to gravatar_for(current_user, size: 140, className: "img-thumbnail"), current_user %>
+				<h4><%= link_to current_user.email, current_user %></h4>
+			</div>
+		</div>
+	</div>
 
-<div class="row profile-w">
-	<div class="col-md-10">
-		<%= link_to gravatar_for(current_user, size: 180, className: "img-thumbnail"), current_user %>
-		<h1 class="profile-name">
-			<%= link_to current_user.name, current_user %>
-		</h1>
-		<h3><span class="label label-info"><%= pluralize(current_user.microposts.count, "micropost") %></span></h3>
-		<h4><%= link_to 'My profile', current_user %></h4>
+	<div class="panel-footer">
+		<p class="text-info">
+			<strong>
+				<%= link_to pluralize(current_user.microposts.count, "tweet"), current_user %>
+			</strong>
+		</p>
 	</div>
 </div>
 

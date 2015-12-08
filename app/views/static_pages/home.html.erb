@@ -1,7 +1,9 @@
 <% if user_signed_in? %>
 	<div class="row">
-		<aside class="col-md-4 asside-background">
-			<%= render 'shared/user_info' %>	
+		<aside class="col-md-4">
+			<div class="user-info">
+				<%= render 'shared/user_info' %>	
+			</div>
 			<div class="micropost-form">
 				<%= render 'shared/micropost_form' %>	
 			</div>
@@ -14,7 +16,7 @@
 				<%= render 'shared/feed' %>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2"></div>
 	</div>
 <% else %>
 		<div class="row">
