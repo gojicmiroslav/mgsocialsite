@@ -241,6 +241,10 @@ input {
 	margin-left: 0;
 }
 
+.micropost-form{
+	margin-top:15px;
+}
+
 /* Users index */
 .users{
 	list-style:none;
@@ -292,7 +296,7 @@ aside {
 	}
 }
 
-span.picture {
+.picture{
 	margin-top: 10px;
 	input {
 		border: 0;
@@ -365,5 +369,67 @@ span.picture {
 .auth-back{
 	background-color: #eee;
 }
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-name{
+	font-size:25px;
+	text-align:left;
+	letter-spacing:0;
+}
+
+.profile-name a{
+	color:#292f33;
+}
+
+.app-background{
+	background-color:#f5f8fa;
+	padding-top:20px;
+	z-index:99999;
+}
+
+.tweet-item-group{
+	padding-left:40px;
+}
+
+.tweet-item{
+	padding-top:10px;
+	padding-right:10px;
+}
+
+.tweet-img{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.asside-background{
+	background-color:#e1e8ed;
+	padding:15px;
+	margin-right:10px;
+}
+
+.panel-tweet{
+	padding:5px 0 5px 20px;
+}
+
+.tweet-content{
+	margin-bottom:10px;
+}
+
+.stats-font{
+	font-size:14px;
+}
+
+.stats-font-big{
+	font-size:20px;
+	line-height:40px;
+}
+
+
+
 
 

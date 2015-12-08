@@ -1,16 +1,37 @@
-<li id="micropost-<%= micropost.id %>" class="status">
-	<%= link_to gravatar_for(micropost.user, size: 70), micropost.user %>
-	<span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-	<span class="content">
-		<%= micropost.content %>
-		<%= image_tag micropost.picture.url if micropost.picture? %>
-	</span>
-	<span class="timestamp">
-		Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-		<% if current_user?(micropost.user) %>
-			<span class="delete_panel admin">
-			<%= link_to "delete", micropost, method: :delete, data: {confirm: "Are you shure?"}, class: "btn btn-danger" %>
+<li id="micropost-<%= micropost.id %>" class="list-group-item tweet-item-group">
+	<div class="row">
+		<div class="media">
+			<div class="media-left">
+				<%= link_to gravatar_for(micropost.user, size: 70, className: "media-object"), micropost.user %>
+			</div>
+			<div class="media-body">
+    		<h4 class="media-heading">
+    			<%= link_to user_path(micropost.user) do %> 
+    				@<%= micropost.user.name %> - 
+    				<span class="text-muted">
+							<%= micropost.created_at.to_date.to_formatted_s(:rfc822) %>
+    				</span>
+					<% end %>
+  			</h4>
+		  </div>
+		</div>
+	</div>
+
+
+	<div class="row tweet-item">	
+		<div class="tweet-content">	
+			<span class="content">
+				<%= micropost.content %>
+				<%= image_tag(micropost.picture.url, class: "img-responsive img-rounded tweet-img") if micropost.picture? %>
 			</span>
-		<% end %>
-	</span>
+		</div>
+		<span class="timestamp">
+			<p class="text-warning">Posted <%= time_ago_in_words(micropost.created_at) %> ago.</p>
+			<% if current_user?(micropost.user) %>
+				<span class="delete_panel admin">
+				<%= link_to "delete", micropost, method: :delete, data: {confirm: "Are you shure?"}, class: "btn btn-danger" %>
+				</span>
+			<% end %>
+		</span>
+	</div>
 </li>

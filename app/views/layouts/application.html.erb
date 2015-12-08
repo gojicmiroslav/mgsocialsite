@@ -9,13 +9,15 @@
 </head>
 <body>
 	<%= render "layouts/header" %>
-
+	
+	<div class="app-background">
 	<div class="container">
 		<%= render 'layouts/messages' %>	
 
 		<%= yield %>
 
 		<%= render 'layouts/footer' %>	
+	</div>
 	</div>
 
 	<%= debug(params) if Rails.env.development? %>
