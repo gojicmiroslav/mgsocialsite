@@ -34,7 +34,7 @@ RSpec.feature "User Login", :device do
 		expect(page).not_to have_content("Invalid email or password.")
 		expect(page).to have_css('div.alert', text: "Signed in successfully.")
 
-		click_on "Logout"
+		first(:link, "Logout").click
 
 		expect(page).to have_content("Signed out successfully.")
 		expect(page.current_url).to eq(root_url)
@@ -116,7 +116,7 @@ RSpec.feature "User Login", :device do
 		expect(page).not_to have_content(I18n.t 'devise.failure.invalid')
 		expect(page).to have_css('div.alert', text: I18n.t('devise.sessions.signed_in'))
 
-		click_on "Logout"
+		first(:link, "Logout").click
 
 		expect(page).to have_content(I18n.t 'devise.sessions.signed_out')
 		expect(page).to have_css('div.alert')

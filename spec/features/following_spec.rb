@@ -34,14 +34,17 @@ RSpec.feature "Relationships", type: :feature do
 		click_on "Users"
 		expect(page).to have_content("All Users")
 		first(:link, other_user.name).click
+		
 		# Follow
 		expect do
-			find("input[name=commit]").click
+			#find("button[value=Follow]").click
+			click_button "Follow"
 		end.to change(Relationship, :count).by(1)
-		expect(page).to have_css("input[value=Unfollow]")
+		
 		# Unfollow
 		expect do
-			find("input[name=commit]").click
+			#find("button[value=Unfollow]").click
+			click_button "Unfollow"
 		end.to change(Relationship, :count).by(-1)
 	end
 

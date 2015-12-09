@@ -10,8 +10,7 @@ RSpec.feature "User Profile", :device do
 		expect(page).to have_selector("title",
 																		:text => full_title(user.name),
 																		:visible => false)	
-		expect(page).to have_css("h1", text: user.name)
-		expect(page).to have_css("img.gravatar")
+		expect(page).to have_content(user.name)
 		expect(page).to have_content(user.microposts.count.to_s)
 		expect(page).to have_css("div.pagination")
 	end
