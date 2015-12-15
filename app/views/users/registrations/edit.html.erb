@@ -1,10 +1,15 @@
 <% provide(:title, "Edit") %>
 
-<h1>Update your profile</h1>
-
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
 
+    <div class="panel-heading">
+      <h2>Account</h2>
+      <p style="text-align: center">Change your basic account settings</p>
+    </div>
+
+    <div class="panel-body">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
       <%= devise_error_messages! %>
@@ -52,5 +57,9 @@
     <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary" %></p>
 
     <%= link_to "Back", :back %>
+    </div><!-- panel-body -->
+
+
+    </div>
   </div>
 </div>
